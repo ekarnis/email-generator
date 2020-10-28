@@ -33,8 +33,10 @@ export function EventCard (props) {
   const startTime = useSelector(selectStartTime)
   const title = useSelector(selectTitle)
 
+  const dispatch = useDispatch()
+
   return (
-    <article className='bg-white p-4 rounded hover:shadow-xl m-4'>
+    <article className='bg-white p-4 rounded hover:shadow-xl mb-5 mx-4'>
       <header className='flex w-full justify-between mb-4'>
         <h2 className='text-3xl font-extrabold'>{title ? title : 'Title'}</h2>
         <Button text='Delete' type='primary' />
@@ -102,7 +104,7 @@ export function EventCard (props) {
             className='border border-gray-300 hover:border-blue-500 rounded px-2 py-1 flex-grow'
             style={{ scrollbarColor: 'red yellow;' }}
             value={description}
-            onChange={setDescription}
+            onChange={e => dispatch(setDescription(e.target.value))}
           ></textarea>
           <span>
             <p className='text-xl font-bold'>End</p>

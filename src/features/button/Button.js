@@ -4,10 +4,12 @@ export function Button (props) {
   let colour
   switch (props.type) {
     case 'inverted':
-      colour = 'bg-white hover:bg-gray-300 text-red-600'
+      colour =
+        'bg-white hover:bg-red-700 text-red-700 hover:text-white border border-transparent hover:border-white'
       break
     case 'primary':
-      colour = 'bg-red-700 hover:bg-red-800 text-white'
+      colour =
+        'bg-red-700 hover:bg-white text-white hover:text-red-700 border border-transparent hover:border-red-700'
       break
     default:
       break
