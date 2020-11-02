@@ -15,7 +15,10 @@ export function Button (props) {
       break
   }
   return (
-    <button className={colour + ' font-bold rounded px-4 py-2 mx-2'}>
+    <button
+      className={colour + ' font-bold rounded px-4 py-2 mx-2'}
+      onClick={props.onClick}
+    >
       {props.text}
     </button>
   )

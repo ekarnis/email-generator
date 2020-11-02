@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from '../features/counter/counterSlice'
-import eventReducer from '../features/event-card/eventSlice'
+import eventsReducer from '../features/events/eventsSlice'
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
-    event: eventReducer
+    events: eventsReducer
   }
 })
