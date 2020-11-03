@@ -1,22 +1,33 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { MIDDLE } from '../../constants/email'
-
-import { Event } from './Event'
+import { EmailEvent } from './EmailEvent'
 import { Input } from '../input/Input'
 
+import { selectEvents } from '../events/eventsSlice'
+
+import {
+  selectTitle,
+  selectSubTitle,
+  titleUpdated,
+  subTitleUpdated
+} from './emailSlice'
+
 export function EmailPreview (props) {
-  const events = useSelector(state => state.events)
+  const dispatch = useDispatch()
+
+  const events = useSelector(selectEvents)
+  const title = useSelector(selectTitle)
+  const subTitle = useSelector(selectSubTitle)
 
   const renderedEvents = events.map(event => {
-    return <Event {...event} key={event.id} />
+    return <EmailEvent {...event} key={event.id} />
   })
 
   return (
     <article>
       <section
-        className='bg-white p-4 rounded hover:shadow-xl mb-5 mx-4 overflow-y-auto'
+        className='bg-white p-4 rounded hover:shadow-xl mx-4 overflow-y-auto'
         style={{ width: '50vh', height: '80vh' }}
       >
         <img
@@ -25,11 +36,13 @@ export function EmailPreview (props) {
         />
         <Input
           extraClasses='text-5xl font-extrabold text-center w-full mt-2'
-          value='Events this week'
+          value={title}
+          onChange={value => dispatch(titleUpdated(value))}
         />
         <Input
           extraClasses='text-3xl text-center mb-6 w-full mt-2'
-          value='Come out and get involved!'
+          value={subTitle}
+          onChange={value => dispatch(subTitleUpdated(value))}
         />
 
         {renderedEvents}
