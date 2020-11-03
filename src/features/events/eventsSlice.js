@@ -17,7 +17,7 @@ const initialState = [
 
 const reducers = {
   eventAdded: {
-    reducer (state, action) {
+    reducer: (state, action) => {
       state.push(action.payload)
     },
     prepare () {
@@ -38,31 +38,11 @@ const reducers = {
   },
 
   eventRemoved: (state, action) =>
-    (state = state.filter(event => event.id !== action.payload)),
+    state.filter(event => event.id !== action.payload),
 
   eventUpdated (state, action) {
-    const {
-      id,
-      date,
-      description,
-      endTime,
-      eventLink,
-      image,
-      location,
-      startTime,
-      title
-    } = action.payload
-    const existingEvent = state.find(event => event.id === id)
-    if (existingEvent) {
-      existingEvent.date = date
-      existingEvent.description = description
-      existingEvent.endTime = endTime
-      existingEvent.eventLink = eventLink
-      existingEvent.image = image
-      existingEvent.location = location
-      existingEvent.startTime = startTime
-      existingEvent.title = title
-    }
+    const existingEvent = state.find(event => event.id === action.payload.id)
+    if (existingEvent) Object.assign(existingEvent, action.payload)
   }
 }
 
