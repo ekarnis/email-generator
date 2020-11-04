@@ -1,7 +1,12 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { eventUpdated, eventRemoved } from './eventsSlice'
+import {
+  eventUpdated,
+  eventRemoved,
+  dateUpdated,
+  dateAdded
+} from './eventsSlice'
 
 import { Button } from '../button/Button'
 import { Input } from '../input/Input'
@@ -19,6 +24,63 @@ export function EventCard (props) {
         <h2>Event not found!</h2>
       </section>
     )
+  }
+
+  const renderDates = (dates, eventId) => {
+    return dates.map(date => (
+      <div className='flex w-full justify-between mb-3' key={date.id}>
+        <div className='flex flex-col flex-grow mx-4'>
+          <p className='text-xl font-bold'>Date</p>
+          <Input
+            type='date'
+            extraClasses='w-full'
+            value={date.date}
+            onChange={value =>
+              dispatch(
+                dateUpdated({
+                  id: eventId,
+                  date: { ...date, date: value }
+                })
+              )
+            }
+          />
+        </div>
+
+        <div className='flex flex-col flex-grow mx-4'>
+          <p className='text-xl font-bold'>Start</p>
+          <Input
+            type='time'
+            extraClasses='w-full'
+            value={date.startTime}
+            onChange={value =>
+              dispatch(
+                dateUpdated({
+                  id: eventId,
+                  date: { ...date, startTime: value }
+                })
+              )
+            }
+          />
+        </div>
+
+        <div className='flex flex-col flex-grow mx-4'>
+          <p className='text-xl font-bold'>End</p>
+          <Input
+            type='time'
+            extraClasses='w-full'
+            value={date.endTime}
+            onChange={value =>
+              dispatch(
+                dateUpdated({
+                  id: eventId,
+                  date: { ...date, endTime: value }
+                })
+              )
+            }
+          />
+        </div>
+      </div>
+    ))
   }
 
   return (
@@ -67,29 +129,13 @@ export function EventCard (props) {
               }
             />
           </span>
-          <span>
-            <p className='text-xl font-bold'>Date</p>
-            <Input
-              type='date'
-              extraClasses='w-full'
-              value={event.date}
-              onChange={value =>
-                dispatch(
-                  eventUpdated({
-                    ...event,
-                    date: value
-                  })
-                )
-              }
-            />
-          </span>
         </div>
 
         <div className='flex flex-col h-full justify-evenly flex-grow mx-4'>
           <span className='mb-3'>
             <p className='text-xl font-bold'>Image Link</p>
             <Input
-              placeHolder='https://i.imgur.com/PH6Yj0F.png'
+              placeHolder='https://i.imgur.com/AB3D5FG.png'
               extraClasses='w-full'
               value={event.image}
               onChange={value =>
@@ -105,7 +151,7 @@ export function EventCard (props) {
           <span>
             <p className='text-xl font-bold'>Facebook Link</p>
             <Input
-              placeHolder='www.facebook.com/events/574206449784456'
+              placeHolder='www.facebook.com/events/123456789'
               extraClasses='w-full'
               value={event.eventLink}
               onChange={value =>
@@ -118,25 +164,9 @@ export function EventCard (props) {
               }
             />
           </span>
-          <span>
-            <p className='text-xl font-bold'>Start</p>
-            <Input
-              type='time'
-              extraClasses='w-full'
-              value={event.startTime}
-              onChange={value =>
-                dispatch(
-                  eventUpdated({
-                    ...event,
-                    startTime: value
-                  })
-                )
-              }
-            />
-          </span>
         </div>
 
-        <span className='flex flex-col  flex-grow mx-4'>
+        <div className='flex flex-col  flex-grow mx-4'>
           <p className='text-xl font-bold'>Description</p>
           <textarea
             className='border border-gray-300 hover:border-blue-500 rounded px-2 py-1 flex-grow'
@@ -151,24 +181,18 @@ export function EventCard (props) {
               )
             }
           ></textarea>
-          <span>
-            <p className='text-xl font-bold'>End</p>
-            <Input
-              type='time'
-              extraClasses='w-full'
-              value={event.endTime}
-              onChange={value =>
-                dispatch(
-                  eventUpdated({
-                    ...event,
-                    endTime: value
-                  })
-                )
-              }
-            />
-          </span>
-        </span>
+        </div>
       </div>
+
+      <hr />
+
+      {renderDates(event.dates, event.id)}
+
+      <Button
+        text='Add Date'
+        type='inverted'
+        onClick={() => dispatch(dateAdded(event.id))}
+      />
     </article>
   )
 }

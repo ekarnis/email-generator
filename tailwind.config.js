@@ -7,7 +7,13 @@ module.exports = {
     'public/**/*.html'
   ],
   theme: {
-    extend: {}
+    extend: {
+      colors: {
+        red: {
+          '700': '#c71d1d'
+        }
+      }
+    }
   },
   variants: {},
   plugins: []
