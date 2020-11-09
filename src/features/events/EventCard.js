@@ -5,7 +5,8 @@ import {
   eventUpdated,
   eventRemoved,
   dateUpdated,
-  dateAdded
+  dateAdded,
+  dateRemoved
 } from './eventsSlice'
 
 import { Button } from '../button/Button'
@@ -18,18 +19,14 @@ export function EventCard (props) {
     state.events.find(event => event.id === props.eventId)
   )
 
-  if (!event) {
-    return (
-      <section>
-        <h2>Event not found!</h2>
-      </section>
-    )
-  }
-
   const renderDates = (dates, eventId) => {
-    return dates.map(date => (
-      <div className='flex w-full justify-between mb-3' key={date.id}>
-        <div className='flex flex-col flex-grow mx-4'>
+    return dates.map((date, index) => (
+      <div className='flex w-full mb-4 items-center' key={date.id}>
+        {dates.length > 1 ? (
+          <h3 className='text-xl font-bold ml-6 mr-6'>Day {index + 1}</h3>
+        ) : null}
+
+        <div className='flex flex-col mx-4'>
           <p className='text-xl font-bold'>Date</p>
           <Input
             type='date'
@@ -46,7 +43,7 @@ export function EventCard (props) {
           />
         </div>
 
-        <div className='flex flex-col flex-grow mx-4'>
+        <div className='flex flex-col mx-4'>
           <p className='text-xl font-bold'>Start</p>
           <Input
             type='time'
@@ -63,7 +60,7 @@ export function EventCard (props) {
           />
         </div>
 
-        <div className='flex flex-col flex-grow mx-4'>
+        <div className='flex flex-col mx-4'>
           <p className='text-xl font-bold'>End</p>
           <Input
             type='time'
@@ -79,6 +76,15 @@ export function EventCard (props) {
             }
           />
         </div>
+
+        <Button
+          text='Delete'
+          type='inverted'
+          extraClasses='self-end'
+          onClick={() =>
+            dispatch(dateRemoved({ id: event.id, dateId: date.id }))
+          }
+        />
       </div>
     ))
   }
@@ -92,6 +98,7 @@ export function EventCard (props) {
         <Button
           text='Delete'
           type='primary'
+          extraClasses='self-center'
           onClick={() => dispatch(eventRemoved(event.id))}
         />
       </header>
@@ -184,7 +191,7 @@ export function EventCard (props) {
         </div>
       </div>
 
-      <hr />
+      <hr className='my-4' />
 
       {renderDates(event.dates, event.id)}
 

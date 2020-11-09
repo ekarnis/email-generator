@@ -16,7 +16,11 @@ export function Button (props) {
   }
   return (
     <button
-      className={colour + ' font-bold rounded px-4 py-2 mx-2'}
+      className={
+        colour +
+        (props.extraClasses ? ' ' + props.extraClasses : '') +
+        ' font-bold rounded px-4 py-2 mx-2'
+      }
       onClick={props.onClick}
     >
       {props.text}

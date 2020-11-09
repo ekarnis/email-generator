@@ -68,8 +68,12 @@ const reducers = {
 
   dateRemoved: (state, action) => {
     const existingEvent = state.find(event => event.id === action.payload.id)
-    if (existingEvent)
-      existingEvent.dates.filter(date => date.id !== action.payload.dateId)
+
+    if (existingEvent) {
+      existingEvent.dates = existingEvent.dates.filter(
+        date => date.id !== action.payload.dateId
+      )
+    }
   },
 
   dateUpdated (state, action) {
