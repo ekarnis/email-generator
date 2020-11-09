@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Header } from './features/header/Header'
-import { Button } from './features/button/Button'
+import { Header } from './features/ui-elements/Header'
+import { Button } from './features/ui-elements/Button'
 import { EventCard } from './features/events/EventCard'
 import { EmailPreview } from './features/email/EmailPreview'
 

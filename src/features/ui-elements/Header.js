@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '../button/Button'
+import { Button } from './Button'
 export function Header () {
   return (
     <header className='bg-red-700 px-3 py-1 flex justify-between'>

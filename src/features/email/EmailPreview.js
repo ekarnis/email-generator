@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { EmailEvent } from './EmailEvent'
-import { Input } from '../input/Input'
+import { Input } from '../ui-elements/Input'
 
 import { selectEvents } from '../events/eventsSlice'
 

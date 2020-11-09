@@ -9,8 +9,8 @@ import {
   dateRemoved
 } from './eventsSlice'
 
-import { Button } from '../button/Button'
-import { Input } from '../input/Input'
+import { Button } from '../ui-elements/Button'
+import { Input } from '../ui-elements/Input'
 
 export function EventCard (props) {
   const dispatch = useDispatch()
