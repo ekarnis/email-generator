@@ -8,7 +8,8 @@ const initialState = [
         date: '',
         endTime: '',
         id: nanoid(),
-        startTime: ''
+        startTime: '',
+        timeZone: ''
       }
     ],
     description: '',
@@ -33,7 +34,8 @@ const reducers = {
               date: '',
               endTime: '',
               id: nanoid(),
-              startTime: ''
+              startTime: '',
+              timeZone: ''
             }
           ],
           description: '',
@@ -62,7 +64,8 @@ const reducers = {
         date: '',
         endTime: '',
         id: nanoid(),
-        startTime: ''
+        startTime: '',
+        timeZone: ''
       })
   },
 

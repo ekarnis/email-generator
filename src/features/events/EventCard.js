@@ -30,7 +30,7 @@ export function EventCard (props) {
           <p className='text-xl font-bold'>Date</p>
           <Input
             type='date'
-            extraClasses='w-full'
+            extraClasses='w-32'
             value={date.date}
             onChange={value =>
               dispatch(
@@ -47,7 +47,7 @@ export function EventCard (props) {
           <p className='text-xl font-bold'>Start</p>
           <Input
             type='time'
-            extraClasses='w-full'
+            extraClasses='w-32'
             value={date.startTime}
             onChange={value =>
               dispatch(
@@ -64,13 +64,30 @@ export function EventCard (props) {
           <p className='text-xl font-bold'>End</p>
           <Input
             type='time'
-            extraClasses='w-full'
+            extraClasses='w-32'
             value={date.endTime}
             onChange={value =>
               dispatch(
                 dateUpdated({
                   id: eventId,
                   date: { ...date, endTime: value }
+                })
+              )
+            }
+          />
+        </div>
+
+        <div className='flex flex-col mx-4'>
+          <p className='text-xl font-bold'>Time Zone</p>
+          <Input
+            type='text'
+            extraClasses='w-32'
+            value={date.timeZone}
+            onChange={value =>
+              dispatch(
+                dateUpdated({
+                  id: eventId,
+                  date: { ...date, timeZone: value }
                 })
               )
             }
@@ -177,7 +194,6 @@ export function EventCard (props) {
           <p className='text-xl font-bold'>Description</p>
           <textarea
             className='border border-gray-300 hover:border-blue-500 rounded px-2 py-1 flex-grow'
-            style={{ scrollbarColor: 'red yellow' }}
             value={event.description}
             onChange={e =>
               dispatch(
